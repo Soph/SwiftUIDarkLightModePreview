@@ -5,9 +5,15 @@ import SwiftUI
 
 public struct DarkLightModePreview<Content: View>: View {
     var content: Content
+    var backgroundColor: Color
 
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
+        #if os(macOS)
+        self.backgroundColor = Color(NSColor.windowBackgroundColor)
+        #else
+        self.backgroundColor = Color(UIColor.systemBackground)
+        #endif
     }
 
     public var body: some View {
